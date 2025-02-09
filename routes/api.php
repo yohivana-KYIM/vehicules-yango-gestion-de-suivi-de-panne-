@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\ChauffeurController;
 use App\Http\Controllers\Api\PiecesUtiliseesController;
 use App\Http\Controllers\Api\PannesController;
 use App\Http\Controllers\Api\EntretienPreventifController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +25,11 @@ use App\Http\Controllers\AuthController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/me', [AuthController::class, 'me']); // Added route for "me"
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/me', [AuthController::class, 'me']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/users', [AuthController::class, 'getAllUsers']); // Ajout de la route pour récupérer tous les utilisateurs
+});
 
     Route::apiResource('vehicules', VehiculeController::class);
     Route::apiResource('interventions', InterventionController::class);
@@ -50,5 +52,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/pannes/report', [Api\PannesController::class, 'reportPanne']); //Example
     });
 
-    
-});
+
