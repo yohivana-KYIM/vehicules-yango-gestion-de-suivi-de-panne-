@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "6f77fa1c-ead3-4b10-8902-1e5eed2616a0",
+		"name": "Vehicules pour yango",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27817212",
+		"_collection_link": "https://orange-water-355539.postman.co/workspace/My-Workspace~6ec921c5-86f9-422b-851d-80781b776ee6/collection/27817212-6f77fa1c-ead3-4b10-8902-1e5eed2616a0?action=share&source=collection_link&creator=27817212"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8000/api/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\": \"IVANA\",\r\n\"email\": \"IVANA@example.com\",\r\n\"password\": \"password\",\r\n\"password_confirmation\": \"password\",\r\n\"role\": \"chauffeur\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/api/register"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "1|e6CkWb80R4UHXbZpVSdPsnhcNltkwgGOpQGfKC8C7c713ddb",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\": \"IVANA\",\r\n\"email\": \"IVANA@example.com\",\r\n\"password\": \"password\",\r\n\"password_confirmation\": \"password\",\r\n\"role\": \"chauffeur\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/api/login"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/me",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 1|e6CkWb80R4UHXbZpVSdPsnhcNltkwgGOpQGfKC8C7c713ddb",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\": \"IVANA\",\r\n\"email\": \"IVANA@example.com\",\r\n\"password\": \"password\",\r\n\"password_confirmation\": \"password\",\r\n\"role\": \"chauffeur\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/api/me/"
+			},
+			"response": []
+		}
+	]
+}
