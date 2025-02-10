@@ -69,10 +69,43 @@ class AuthController extends Controller
         ]);
     }
 
+     /**
+     * Récupération des informations de l'utilisateur connecté
+     */
     public function me(Request $request)
     {
-        return response()->json($request->user()); // Returns the authenticated user's data
+        $user = $request->user(); // Récupération de l'utilisateur connecté
+        return response()->json([
+            'message' => 'Informations de l\'utilisateur récupérées avec succès.',
+            'data' => $user,
+        ], 200);
     }
+
+
+     public function forgotPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Invalid data',
+                'errors' => $validator->errors(),
+            ], 400);
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        $user->password = Hash::make(Str::random(8));
+        $user->save();
+
+        return response()->json([
+            'message' => 'Your new password has been generated, Please check your email'
+        ], 200);
+    }
+
+
 
     /**
      * Get all users.
