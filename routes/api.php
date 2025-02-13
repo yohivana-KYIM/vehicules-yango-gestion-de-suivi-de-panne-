@@ -25,34 +25,31 @@ use App\Http\Controllers\Api\AuthController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-
-
-Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/users', [AuthController::class, 'getAllUsers']); // Ajout de la route pour récupérer tous les utilisateurs
+     Route::put('/users/{id}', [AuthController::class, 'updateUser']);
+    Route::delete('/users/{id}', [AuthController::class, 'destroyUser']); // Ajout de la route pour supprimer un utilisateur
 });
 
-    Route::apiResource('vehicules', VehiculeController::class);
-    Route::apiResource('interventions', InterventionController::class);
-    Route::apiResource('mecaniciens', MecanicienController::class);
-    Route::apiResource('chauffeurs', ChauffeurController::class);
-    Route::apiResource('pieces-utilisees', PiecesUtiliseesController::class);
-    Route::apiResource('pannes', PannesController::class);
-    Route::apiResource('entretien-preventifs', EntretienPreventifController::class);
+Route::apiResource('vehicules', VehiculeController::class);
+Route::apiResource('interventions', InterventionController::class);
+Route::apiResource('mecaniciens', MecanicienController::class);
+Route::apiResource('chauffeurs', ChauffeurController::class);
+Route::apiResource('pieces-utilisees', PiecesUtiliseesController::class);
+Route::apiResource('pannes', PannesController::class);
+Route::apiResource('entretien-preventifs', EntretienPreventifController::class);
 
-    Route::middleware(['role:admin'])->group(function () {
+Route::middleware(['role:admin'])->group(function () {
         // Routes accessible only to admins
     });
 
-    Route::middleware(['role:gestionnaire,admin'])->group(function () {
+Route::middleware(['role:gestionnaire,admin'])->group(function () {
         // Routes accessible to gestionnaires and admins
     });
 
-    Route::middleware(['role:chauffeur'])->group(function () {
-        // Routes accessible to chauffeurs
-        Route::post('/pannes/report', [Api\PannesController::class, 'reportPanne']); //Example
-    });
-
-
+Route::middleware(['role:chauffeur'])->group(function () {
+    // Routes accessible to chauffeurs
+    Route::post('/pannes/report', [Api\PannesController::class, 'reportPanne']); //Example
+});
